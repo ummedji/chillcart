@@ -14,7 +14,7 @@
  	echo '<div class="header detailheader">';
  } ?>
  <header>
-<div class="container-fluid">
+<div class="container-fluid home_parent">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle  hidden-xs" data-toggle="collapse" data-target="#example-navbar-collapse">
@@ -34,8 +34,8 @@
 						<li> <a href="<?php echo $siteUrl.'/customer/users/userLogout'; ?>"><img alt="Logout" src="<?php echo $siteUrl.'/frontend/images/logout.png'; ?>" title="Logout"><br> <span>Logout</span></a> </li>
 						<li> <a href="<?php echo $siteUrl.'/customer/customers/myaccount'; ?>"><img alt="My Account" src="<?php echo $siteUrl.'/frontend/images/myaccount.png'; ?>" title="My Account"><br> <span>My Account</span></a> </li> <?php 
 					} else {?>
-						<li> <a href="<?php echo $siteUrl.'/customerlogin'; ?>"><img alt="Login" src="<?php echo $siteUrl.'/frontend/images/login.png'; ?>" title="Login"><br> <span>Login</span></a> </li>
-						<li> <a href="<?php echo $siteUrl.'/signup'; ?>"><img alt="Signup" src="<?php echo $siteUrl.'/frontend/images/signup.png'; ?>" title="Signup"><br> <span>Signup</span></a></li> <?php 
+						<li> <a href="#" data-toggle="modal" data-target="#demo-1"><img alt="Login" src="<?php echo $siteUrl.'/frontend/images/login.png'; ?>" title="Login"><br> <span>Login</span></a> </li>
+						<li> <a href="#" data-toggle="modal" data-target="#demo-2"><img alt="Signup" src="<?php echo $siteUrl.'/frontend/images/signup.png'; ?>" title="Signup"><br> <span>Signup</span></a></li> <?php
 					} 
 					if ($this->request->params['controller'] == 'searches' &&
 						$this->request->params['action'] == 'stores') { ?>
@@ -56,7 +56,7 @@
 		</div>
 		
 		<?php if ($this->request->params['controller'] == 'searches' && $this->request->params['action'] == 'storeitems') { ?>
-		<ul class="search_bar nav navbar-nav text-center-xs text-center-sm <?php echo ($this->request->params['controller'] == 'searches' && $this->request->params['action'] == 'storeitems') ? '' : 'navbar-right'; ?> "> 
+		<ul class="search_bar nav navbar-nav text-center-xs text-center-sm <?php echo ($this->request->params['controller'] == 'searches' && $this->request->params['action'] == 'storeitems') ? '' : 'navbar-right'; ?> ">
 			<li class="dropdown menuDropdown">
 				<a href="javascript:void(0);" class="dropdown-toggle shopMenu" data-toggle="dropdown">
 					<div class="visible-xs"><?php echo __('Shopping in', true); ?> <?php echo $storeCity[$cityId]. ' '. $storeArea[$areaId]; ?> </div>
@@ -131,7 +131,7 @@
 
 				if ($controllerName != 'checkouts') { ?>
 
-					<ul class="nav navbar-nav navbar-right hidden-sm hidden-md">
+					<ul class="nav navbar-nav navbar-right hidden-sm hidden-md home-navbar-nav">
 						<?php
 							if ($this->request->params['controller'] == 'searches' &&
 								$this->request->params['action'] == 'storeitems') {
@@ -167,11 +167,11 @@
 						if(!empty($loggedCheck) && ($loggedCheck['role_id'] == 4)){ ?>
 
 							<li> <a href="<?php echo $siteUrl.'/customer/customers/myaccount'; ?>"> <?php echo __('Myaccount', true); ?></a> </li>
-							<li> <a href="<?php echo $siteUrl.'/customer/users/userLogout'; ?>"> <?php echo __('Logout', true); ?></a> </li> <?php 
+							<li> <a href="<?php echo $siteUrl.'/customer/users/userLogout'; ?>"> <?php echo __('Logout', true); ?></a> </li> <?php
 						} else {?>
 
-							<li> <a href="<?php echo $siteUrl.'/signup'; ?>"> <?php echo __('Sign Up', true); ?></a></li>
-							<li> <a href="<?php echo $siteUrl.'/customerlogin'; ?>"> <?php echo __('Login', true); ?></a> </li> <?php 
+							<li> <a href="#" data-toggle="modal" data-target="#demo-2"> <?php echo __('Sign Up', true); ?></a></li>
+							<li> <a href="#" data-toggle="modal" data-target="#demo-1"> <?php echo __('Login', true); ?></a> </li> <?php
 						} ?>	
 						
 					</ul> <?php

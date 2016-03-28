@@ -26,17 +26,35 @@
 
 					<?php					
 					foreach ($productDetails['ProductImage'] as $key => $value) { 
-						$imageSrc = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/original/'.$value['image_alias']; ?>
+
+                                                //LIVE
+						//$imageSrc = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/original/'.$value['image_alias']; 
+
+                                                //LOCAL
+
+                                                $imageSrc = "https://s3-eu-west-1.amazonaws.com/demo.chillcart.images".$siteBucket.'/stores/products/original/'.$value['image_alias'];  ?>
+
+
+
 						<div class="item" >
 							<img src="<?php echo $imageSrc;?>" alt="<?php echo $productDetails['Product']['product_name']; ?>" onerror="this.onerror=null;this.src='<?php echo $siteUrl."/images/no-imge.jpg"; ?>'">
-						</div> <?php
-					} ?> 					
+						</div> 
+<?php	} ?> 					
 				</div>
 				<div class="col-md-10 col-md-offset-1">
 					<div id="sync2" class="owl-carousel">
 		                <?php
 						foreach ($productDetails['ProductImage'] as $key => $value) { 
-							$imageSrc = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/original/'.$value['image_alias']; ?>
+
+                                                        //LIVE
+
+							//$imageSrc = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/original/'.$value['image_alias'];
+
+                                                        //LOCAL
+
+                                                    $imageSrc = "https://s3-eu-west-1.amazonaws.com/demo.chillcart.images".$siteBucket.'/stores/products/original/'.$value['image_alias']; 
+ ?>
+
 							<div class="item" >
 								<img src="<?php echo $imageSrc;?>" alt="<?php echo $productDetails['Product']['product_name']; ?>" onerror="this.onerror=null;this.src='<?php echo $siteUrl."/images/no-imge.jpg"; ?>'">
 							</div> <?php

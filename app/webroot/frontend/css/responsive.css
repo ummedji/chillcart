@@ -7,7 +7,7 @@
 
 @media only screen and (min-width: 1300px) and (max-width: 1500px) {
     #howItWork aside {
-        width: 200px;
+        width: 180px;
     }
 
     footer {
@@ -18,7 +18,7 @@
 
 @media only screen and (min-width: 1024px) and (max-width: 1300px) {
     #howItWork aside {
-        width: 150px;
+        width: 180px;
     }
 
     footer {
@@ -52,29 +52,29 @@
         margin-right: 20px;
     }
 
-    header ul li {
+    /*header ul li {
         display: block;
         width: 100%;
         text-align: centre;
         outline: 1px solid #121212;
         background: rgba(0, 0, 0, 0.2);
         height: 27px;
-    }
+    }*/
 
-    header ul li:HOVER {
+    /*header ul li:HOVER {
         display: block;
         width: 100%;
         text-align: centre;
         background: rgba(0, 0, 0, 0.5);
         height: 27px;
-    }
+    }*/
 
     header ul li a {
         margin-left: 10px;
     }
 
     #howItWork aside {
-        width: 100px;
+        width: 130px;
     }
 
     #howItWork aside img {
@@ -96,13 +96,13 @@
     /*	#searchBar { padding: 40px 30px;margin-top:70px; } */
     /*	#searchBar select { width: 280px; font-size: 16px; }
         #searchBar button { font-size: 16px; padding: 12px 16px; } */
-    #searchBar select {
+    /*#searchBar select {
         margin-left: auto;
         margin-right: auto;
         display: block;
         width: 100%;
         margin-bottom: -15px;
-    }
+    }*/
 
     #searchBar button {
         width: 100%;
@@ -153,31 +153,31 @@
         margin-right: 20px;
     }
 
-    header ul li {
+    /*header ul li {
         display: block;
         width: 100%;
         text-align: centre;
         outline: 1px solid #121212;
         background: rgba(0, 0, 0, 0.2);
         height: 27px;
-    }
+    }*/
 
-    header ul li:HOVER {
+   /* header ul li:HOVER {
         display: block;
         width: 100%;
         text-align: centre;
         background: rgba(0, 0, 0, 0.5);
         height: 27px;
-    }
+    }*/
 
     header ul li a {
         margin-left: 10px;
     }
 
-    #howItWork aside {
+    /*#howItWork aside {
         width: 80px;
         margin: 20px 10px;
-    }
+    }*/
 
     #howItWork aside img {
         width: 100%;
@@ -196,9 +196,9 @@
     }
 
     /*	#searchBar { padding: 35px 28px;margin-top:70px;} */
-    #searchBar h3 {
+/*    #searchBar h3 {
         font-size: 30px;
-    }
+    }*/
 
     #searchBar h3 p {
         font-size: 14px;
@@ -207,13 +207,13 @@
     /*	#searchBar select { width: 200px; padding: 7px; font-size: 12px; }
         #searchBar select { line-height: 28px; }
         #searchBar button { font-size: 13px; padding: 8.5px 16px; } */
-    #searchBar select {
+    /*#searchBar select {
         margin-left: auto;
         margin-right: auto;
         display: block;
         width: 100%;
         margin-bottom: -20px;
-    }
+    }*/
 
     #searchBar button {
         width: 100%;
@@ -275,31 +275,31 @@
         margin-right: 20px;
     }
 
-    header ul li {
+    /*header ul li {
         display: block;
         width: 100%;
         text-align: centre;
         outline: 1px solid #121212;
         background: rgba(0, 0, 0, 0.2);
         height: 27px;
-    }
+    }*/
 
-    header ul li:HOVER {
+    /*header ul li:HOVER {
         display: block;
         width: 100%;
         text-align: centre;
         background: rgba(0, 0, 0, 0.5);
         height: 27px;
-    }
+    }*/
 
     header ul li a {
         margin-left: 10px;
     }
 
-    #howItWork aside {
+    /*#howItWork aside {
         width: 40px;
         margin: 20px 10px;
-    }
+    }*/
 
     #howItWork aside img {
         width: 100%;
@@ -319,9 +319,9 @@
     }
 
     /*	#searchBar { padding: 30px 25px;margin-top:100px} */
-    #searchBar h3 {
+    /*#searchBar h3 {
         font-size: 27px;
-    }
+    }*/
 
     #searchBar h3 p {
         font-size: 14px;
@@ -330,13 +330,13 @@
     /*	#searchBar select { width: 110px; padding: 5px; font-size: 10px; }
         #searchBar select { line-height: 21px; }
         #searchBar button { font-size: 12px; padding: 5.4px 7px; }*/
-    #searchBar select {
+    /*#searchBar select {
         margin-left: auto;
         margin-right: auto;
         display: block;
         width: 100%;
         margin-bottom: -25px;
-    }
+    }*/
 
     #searchBar button {
         width: 100%;
@@ -358,6 +358,7 @@
     footer ul li {
         float: none;
         display: inline-block;
+        width: 30%;
     }
 
     footer ul li a {

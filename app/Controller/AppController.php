@@ -65,8 +65,7 @@ class AppController extends Controller
 
     public function basicSetup()
     {
-
-        $this->siteUrl = 'http://' . $_SERVER['HTTP_HOST'];
+        $this->siteUrl = 'http://' . $_SERVER['HTTP_HOST']."/chillcart/trunk";
         $this->set('siteUrl', $this->siteUrl);
 
         $this->siteName = 'http://' . $_SERVER['HTTP_HOST'];
@@ -104,7 +103,12 @@ class AppController extends Controller
 
 
         //Bucket
-        $this->siteBucket = $siteBucket = Configure::read('CakeS3.bucket');
+		//LIVE
+		
+       // $this->siteBucket = $siteBucket = Configure::read('CakeS3.bucket');
+	   
+	   //LOCAL
+		$this->siteBucket = $siteBucket = Configure::read('demo.chillcart.images');
 
 
         date_default_timezone_set($this->siteSetting['Sitesetting']['site_timezone']);

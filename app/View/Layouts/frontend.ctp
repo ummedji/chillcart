@@ -25,11 +25,13 @@
 		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/products.css" type="text/css" media="all">
 		
 		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/common_new.css" type="text/css" media="all">
+		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/hover.css" type="text/css" media="all">
 
 		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/mobile.css" type="text/css" media="all">
-		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/mobile_1.css" type="text/css" media="all">		
+		<link rel="stylesheet" href="<?php echo $this->webroot; ?>frontend/css/mobile_1.css" type="text/css" media="all">
 
 		<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,400italic" rel="stylesheet" type="text/css">
+
 
 		 <?php
 	
@@ -45,7 +47,7 @@
 
 	<?php echo $this->element('frontend/topheader'); ?>
 	<?php echo $this->Session->flash(); ?>
-	<div class="middle_height">
+	<div class="middle_height search_cont">
 	<?php echo $this->fetch('content'); ?>
 	</div>
 	
@@ -80,6 +82,7 @@
     <script type="text/javascript" src="<?php echo $this->webroot; ?>frontend/js/jquery.mCustomScrollbar.js"></script>
 
     <script type="text/javascript" src="<?php echo $this->webroot; ?>frontend/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->webroot; ?>frontend/js/jquery.flexisel.js"></script>
 
 
     <script type="text/javascript">    	
@@ -642,6 +645,27 @@
 
 		});
 	</script>
+	<script type="text/javascript">
+    $(window).load(function() {
+        $("#flexiselDemo4").flexisel({
+            clone:false
+        });
+
+    });
+    </script>
+
+   <script>
+     $(document).ready(function(){
+        $(".product__inner").on("mouseover",function(){
+            $(this).find(".shopping_bott h6").css("color", "white");
+            $(this).find(".shopping_bott p").css("color", "white");
+        });
+        $(".product__inner").on("mouseout",function(){
+                    $(this).find(".shopping_bott h6").css("color", "#04a7cb");
+                    $(this).find(".shopping_bott p").css("color", "#848484");
+                });
+     });
+   </script>
 
 	<?php
 		if ($this->request->params['controller'] == 'searches' &&

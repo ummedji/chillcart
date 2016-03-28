@@ -72,8 +72,8 @@
 }
 
 .products .product:hover .product__inner {
-
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    background-color: #26CAEF;
 }
 
 .products .product:hover .show-on-hover {
