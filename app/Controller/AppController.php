@@ -65,7 +65,12 @@ class AppController extends Controller
 
     public function basicSetup()
     {
-        $this->siteUrl = 'http://' . $_SERVER['HTTP_HOST']."/chillcart/trunk";
+		if($_SERVER['HTTP_HOST'] == "localhost"){
+	        $this->siteUrl = 'http://' . $_SERVER['HTTP_HOST']."/chillcart/trunk";
+		}
+		else{
+			$this->siteUrl = 'http://' . $_SERVER['HTTP_HOST']."/qa/chillcart";
+		}
         $this->set('siteUrl', $this->siteUrl);
 
         $this->siteName = 'http://' . $_SERVER['HTTP_HOST'];
