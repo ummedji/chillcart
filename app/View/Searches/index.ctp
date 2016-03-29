@@ -4,25 +4,25 @@
 	<p>Know more about your online grocery shopping and make easy shopping</p>
 	<div class="clear"></div>
 	<aside>
-		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/store_search.png" />
+		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/store_search.png" class="hvr-pulse" />
 		<span class="ico"></span>
 		<h3>Store Search</h3>
 		<p>Know more about your online shopping</p>
 	</aside>
 	<aside>
-		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/place_order.png" />
+		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/place_order.png" class="hvr-pulse" />
 		<span class="ico"></span>
 		<h3>Place Order</h3>
 		<p>Know more about your online shopping</p>
 	</aside>
 	<aside>
-		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/schedule_delivery.png" />
+		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/schedule_delivery.png" class="hvr-pulse" />
 		<span class="ico"></span>
 		<h3>Schedule Delivery</h3>
 		<p>Know more about your online shopping</p>
 	</aside>
 	<aside>
-		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/oredr_delivery.png" />
+		<img alt="" src="<?php echo $siteUrl; ?>/frontend/images/oredr_delivery.png" class="hvr-pulse" />
 		<span class="ico"></span>
 		<h3>Get Order Delivered</h3>
 		<p>Know more about your online shopping</p>

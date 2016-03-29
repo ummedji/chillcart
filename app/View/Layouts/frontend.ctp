@@ -116,9 +116,15 @@
              <h3>Create Account</h3>
              </div>
              <div class="modal_form">
-                 <form>
+                 <!--form-->
+                <?php echo $this->Form->create('User', array('class' => 'login-form')); ?>
                      <div class="input-group">
-                         <input type="text" class="form-control email_icon" name="first_name" value="" placeholder="First Name">
+                         <!--input type="text" class="form-control email_icon" name="first_name" value="" placeholder="First Name"-->
+                         
+                        <?php
+                            echo $this->Form->input('Customer.first_name',array('class'=>'form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"First Name")); 
+                        ?> 
+                         
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
