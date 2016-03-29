@@ -34,6 +34,10 @@ Router::connect('/', array('controller' => 'searches', 'action' => 'index'));
 Router::connect('/signup', array('controller' => 'users', 'action' => 'signup'));
 Router::connect('/customerlogin', array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
 
+Router::connect('/aboutus', array('controller' => 'searches', 'action' => 'aboutus'));
+Router::connect('/termsconditions', array('controller' => 'searches', 'action' => 'termsconditions'));
+
+
 Router::connect('/shop/:storename/:id', array('controller' => 'searches', 'action' => 'storeitems'),
     array('pass' => array('storename', 'id')));
 

@@ -58,7 +58,7 @@
                             </div>
 				            <figcaption>
 				                <div class="product-addon">
-				                    <span class="yith-wcqv-button" href="<?php echo $siteUrl.'/shop/'.$value['Store']['seo_url'].'/'.$value['Store']['id']; ?>"><span></span><i class="fa fa-check"></i></span>
+				                    <a class="yith-wcqv-button" href="<?php echo $siteUrl.'/shop/'.$value['Store']['seo_url'].'/'.$value['Store']['id']; ?>"><span></span><i class="fa fa-check"></i></a>
 				                </div>
 				            </figcaption>
 				          </a>

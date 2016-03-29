@@ -612,5 +612,18 @@ class SearchesController extends AppController
             'subCategoryList', 'storeId', 'dealProduct', 'metaTitle',
             'metakeywords', 'metaDescriptions'));
     }
+    
+    
+    public function termsconditions(){
+         $this->layout = 'frontend';
+         $this->set('termsconditions');
+    }
+    
+    public function aboutus(){
+        $this->layout = 'frontend';
+         $this->set('aboutus');
+    }
+    
+   
 
 }

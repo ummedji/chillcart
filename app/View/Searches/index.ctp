@@ -105,12 +105,12 @@
 <footer>
 	<ul>
 		<li><a href="">Home</a></li>
-		<li><a href="">About Us</a></li>
+		<li><a href="<?php echo $siteUrl.'/aboutus'; ?>">About Us</a></li>
 		<li><a href="">Blog</a></li>
 		<li><a href="">Partner Portal</a></li>
 		<li><a href="">Press</a></li>
 		<li><a href="">Locations</a></li>
-		<li><a href="">T&C </a></li>
+		<li><a href="<?php echo $siteUrl.'/termsconditions'; ?>">T&C </a></li>
 		<li><a href="">FAQ </a></li>
 	</ul>
 	<div class="clear"></div>
