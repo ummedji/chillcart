@@ -2,7 +2,7 @@
 	<div class="">
 		<span class="pull-left">
 			<div class="mobile_cart_price" href="javascript:void(0);" >
-				
+
 				<?php echo $siteCurrency; ?><span class="cartTotal">0</span>
 
 				<div class="cart_notification" style="display:none;">
@@ -14,63 +14,81 @@
 			</div>
 		</span>
 		<span class="pull-right viewCart_mobile">
-			<a class="checkout_arrow view relative" href="javascript:void(0);" ><i class="fa fa-shopping-cart white"></i><span class="price_count" id="cartCount">0</span></a>			
+			<a class="checkout_arrow view relative" href="javascript:void(0);" ><i class="fa fa-shopping-cart white"></i><span class="price_count" id="cartCount">0</span></a>
 		</span>
-	</div>	
+	</div>
+</div>
+<div class="top_polonez">
+    <h1>Polonez</h1>
+    <div class="bottom_polonez">
+       <h6><img src="<?php echo $siteUrl.'/app/webroot/frontend/images/organic_speciality.png'; ?>"> Speciality store</h6>
+       <h6><img src="<?php echo $siteUrl.'/app/webroot/frontend/images/deliveries_available.png'; ?>"> Deliveries available 11am-10pm, 7 Days</h6>
+       <div class="clearfix"></div>
+    </div>
 </div>
 
-
 <div class="menuWrapper">
-			
+
 	<div class="category_mobile">
 		<div class="leftsideBar">
 			<div class="leftsideBar_scroller">
 				<a class="close_category" href="javascript:void(0);">X</a>
-				<h1> <?php echo __('List'); ?> </h1>
+				<!--<h1> <?php echo __('List'); ?> </h1>-->
 				<ul>
-					<li><a href="javascript:void(0);" onclick="offerDetails(<?php echo $storeId; ?>);"><span>&rarr;</span>
-						<?php echo __('Offer', true); ?> </a>
-					</li>
-					<li><a href="#Deal"><span>&rarr;</span>
-						<?php echo __('Deals', true); ?> </a></li>
+				  <li>
+				  <a href="#"><?php echo __('List'); ?></a>
+				      <ul>
+                  					<li><a href="javascript:void(0);" onclick="offerDetails(<?php echo $storeId; ?>);"><span><i class="fa fa-play"></i></span>
+                  						<?php echo __('Offer', true); ?> </a>
+                  					</li>
+                  					<li><a href="#Deal"><span><i class="fa fa-play"></i></span>
+                  						<?php echo __('Deals', true); ?> </a></li>
+                  	  </ul>
+				  </li>
+				  <li>
+				     <a href="#"><?php echo __('Categories', true); ?></a>
+				     <ul class="maincategory"> <?php
+                     					foreach ($mainCategoryList as $key => $value) {
+
+                     						//echo "<pre>"; print_r($value);
+
+                     						?>
+                     						<li>
+                     							<a class="mainMenu"><?php
+                     								echo $value['Category']['category_name']; ?></a><?php
+                     							echo $this->Form->hidden('check' ,array('value'=>$value['Category']['id'].'_'.$storeId,
+                     								'class'=>'remove_'.$value['Category']['id']));?>
+                     							<ul class="subcategories">
+                     								<li><a href="#<?php echo $value['Category']['category_name']; ?>"><span><i class="fa fa-play"></i></span> All <?php
+                     										echo $value['Category']['category_name']; ?></a></li><?php
+
+                     								foreach ($value['ChildGroup'] as $keys => $values) {
+
+                     									//echo "<pre>"; print_r($values);
+
+                     									if (in_array($values['id'], $subCategoryList)) { ?>
+
+                     										<li><a href="#<?php echo $values['category_name']; ?>"><span><i class="fa fa-play"></i></span>
+                     												<?php echo $values['category_name'];?></a></li> <?php
+
+                     									}
+
+                     								} ?>
+                     							</ul>
+                     						</li> <?php
+                     					} ?>
+
+                     				</ul>
+				  </li>
+				  <!--<li><a href="#">sdds </a></li>-->
 				</ul>
-				<h1> <?php echo __('Categories', true); ?></h1>
-				<ul class="maincategory"> <?php
-					foreach ($mainCategoryList as $key => $value) {
 
-						//echo "<pre>"; print_r($value);
 
-						?>
-						<li>
-							<a class="mainMenu"><?php
-								echo $value['Category']['category_name']; ?></a><?php
-							echo $this->Form->hidden('check' ,array('value'=>$value['Category']['id'].'_'.$storeId,
-								'class'=>'remove_'.$value['Category']['id']));?>
-							<ul class="subcategories">
-								<li><a href="#<?php echo $value['Category']['category_name']; ?>"><span>&rarr;</span> All <?php
-										echo $value['Category']['category_name']; ?></a></li><?php
 
-								foreach ($value['ChildGroup'] as $keys => $values) {
-
-									//echo "<pre>"; print_r($values);
-
-									if (in_array($values['id'], $subCategoryList)) { ?>
-
-										<li><a href="#<?php echo $values['category_name']; ?>"><span>&rarr;</span>
-												<?php echo $values['category_name'];?></a></li> <?php
-
-									}
-
-								} ?>
-							</ul>
-						</li> <?php
-					} ?>
-										
-				</ul>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="rightSideBar"> <?php
 
 
@@ -81,7 +99,7 @@
 				<header class="products-header">
 					<h4 class="category-name">
 						<span> <?php echo __('Deal Products', true); ?></span>
-					</h4>					
+					</h4>
 				</header>
 
 
@@ -89,17 +107,17 @@
 					<?php foreach ($dealProduct as $key => $value) {
 
                                             //LIVE
-                                            
+
 					//	$imageSrc = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/home/'.$value['MainProduct']['ProductImage'][0]['image_alias'];
 
 					//	$imageSrcSub = 'https://s3.amazonaws.com/'.$siteBucket.'/stores/products/scrollimg/'.$value['SubProduct']['ProductImage'][0]['image_alias'];
-                                                
+
                                                 //LOCAL
-                                                
+
                                             echo   $imageSrc = "https://s3-eu-west-1.amazonaws.com/demo.chillcart.images".$siteBucket.'/stores/products/home/'.$value['MainProduct']['ProductImage'][0]['image_alias'];
 
-					echo 	$imageSrcSub = "https://s3-eu-west-1.amazonaws.com/demo.chillcart.images".$siteBucket.'/stores/products/scrollimg/'.$value['SubProduct']['ProductImage'][0]['image_alias']; 
-                                                
+					echo 	$imageSrcSub = "https://s3-eu-west-1.amazonaws.com/demo.chillcart.images".$siteBucket.'/stores/products/scrollimg/'.$value['SubProduct']['ProductImage'][0]['image_alias'];
+
                                                 ?>
 
 					    <li class="product searchresulttoshow">
@@ -126,7 +144,7 @@
 						                <h2 class="product__detail-title"><a href="javascript:void(0);"><?php echo $value['MainProduct']['product_name'].'+'.$value['SubProduct']['product_name']; ?></a></h2>
 						               	<div class="product__detail-category">
 						               		<a href="javascript:void(0);" rel="tag"><?php echo $value['MainProduct']['ProductDetail'][0]['sub_name']; ?></a>
-						               	</div>			               
+						               	</div>
 
 					                  	<?php if ($value['MainProduct']['ProductDetail'][1]['sub_name']) { ?>
 											<div class="show-on-hover">
@@ -135,8 +153,8 @@
 													<div class="yith-wcwl-add-to-wishlist">
 														<div  style="display:block">
 															<a href="javascript:void(0);" rel="nofollow" class="add_to_wishlist">
-																
-																<?php															
+
+																<?php
 
 																	echo '<p class="contain"> '.$val['sub_name']. ' : ';
 
@@ -156,7 +174,7 @@
 													</div>
 													<?php }
 												} ?>
-											</div> 
+											</div>
 										<?php } ?>
 						                <div class="clear"></div>
 						            </div>
@@ -204,7 +222,7 @@
 			</header>
 			<section>
 				<div class="cart-wrapper" id="cartdetailswrapper">
-					
+
 				</div>
 			</section>
 		</div>

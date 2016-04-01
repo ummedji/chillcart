@@ -65,30 +65,98 @@
       <div class="modal fade login_parent" id="demo-1" tabindex="-1">
         <div class="modal-dialog">
          <div class="modal-content">
+          <div id="loginform" class="loginform">
            <div class="login_logo">
            <img src="<?php echo $siteUrl.'/siteicons/login_logo.png'; ?>" class="img-responsive" >
            <h3>Welcome back!</h3>
            </div>
            <div class="modal_form">
-               <form>
+               <!--form-->
+               
+               <?php
+                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/customerlogin'));
+               ?>
+               
                    <div class="input-group">
-                       <input type="email" class="form-control email_icon" name="login" value="" placeholder="Email Address">
+                       <!--input type="email" class="form-control email_icon" name="login" value="" placeholder="Email Address"-->
+                       
+                       <?php
+                             echo $this->Form->input('username',array('label' => false,  'placeholder' => __('Email Address'),  'class'=>'form-control email_icon',  'autocomplete' => 'off',  'div' => false)); 
+                       ?>
+                       
                        <div class="clearfix"></div>
                    </div>
                    <div class="input-group">
-                       <input type="password" class="form-control email_icon" name="login" value="" placeholder="Password">
+                       <!--input type="password" class="form-control email_icon" name="login" value="" placeholder="Password"-->
+                       
+                        <?php
+                             echo $this->Form->input('password',	array('label' => false,  'placeholder' => __('Password'),  'class'=>'form-control email_icon',  'autocomplete' => 'off',  'div' => false)); 
+                       ?>
+                       
                        <div class="clearfix"></div>
                    </div>
-                   <button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Log In</button>
-               </form>
+                   <!--button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Log In</button-->
+                   
+                   
+                   <?php echo $this->Form->submit(__('Log In'), array('class' => 'btn registre_btn hvr-rectangle-out'));?>
+                   
+                   <?php echo $this->Form->end(); ?>
+                   
+               <!--/form-->
            </div>
            <div class="remenber_sp">
              <div class="checkbox">
-                <input id="checkbox1" name="remember_me" class="styled" type="checkbox">
+                <!--input id="checkbox1" name="remember_me" class="styled" type="checkbox"-->
+                
+                <?php
+                echo $this->Form->input("rememberMe",array('id'=>'remember_me','type'=>'checkbox','label'=>false,'div' =>false));
+                ?>
+                
                 <label for="checkbox1">Remember me</label>
              </div>
              <div class="clearfix"></div>
            </div>
+             
+             </div>
+             
+             
+         <div id="forgotform" class="forgotform" style="display:none;">
+           <div class="login_logo">
+           <img src="<?php echo $siteUrl.'/siteicons/login_logo.png'; ?>" class="img-responsive" >
+           <h3>Forgot Password</h3>
+           </div>
+           <div class="modal_form">
+               <!--form-->
+               
+               <?php
+                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/Forgot'));
+               ?>
+               
+                   <div class="input-group">
+                       <!--input type="email" class="form-control email_icon" name="login" value="" placeholder="Email Address"-->
+                       
+                       <?php
+                             echo $this->Form->input('username',array('label' => false,  'placeholder' => __('Email Address'),  'class'=>'form-control email_icon',  'autocomplete' => 'off',  'div' => false)); 
+                       ?>
+                       
+                       <div class="clearfix"></div>
+                   </div>
+                  
+                   <!--button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Log In</button-->
+                   
+                   
+                   <?php echo $this->Form->submit(__('Submit'), array('class' => 'btn registre_btn hvr-rectangle-out'));?>
+                   
+                   <?php echo $this->Form->end(); ?>
+                   
+               <!--/form-->
+           </div>
+           
+             
+       </div>
+             
+             
+             
            <div class="or-separator text-center">
               <h6>OR</h6>
               <hr>
@@ -100,7 +168,7 @@
 
            <div class="modal-footer text-center">
               <p>Don't have an account? <a href="#" data-toggle="modal" data-target="#demo-2" data-dismiss="modal">Sign up</a></p>
-              <p>Forgot your password? <a href="#">Reset it</a></p>
+              <p>Forgot your password? <a id="forgot_password" href="#">Reset it</a></p>
             </div>
             <div class="clearfix"></div>
          </div>
@@ -117,7 +185,7 @@
              </div>
              <div class="modal_form">
                  <!--form-->
-                <?php echo $this->Form->create('User', array('class' => 'login-form')); ?>
+                <?php echo $this->Form->create('User', array('class' => 'login-form','url'=>'/signup','id'=>'UserSignupForm')); ?>
                      <div class="input-group">
                          <!--input type="text" class="form-control email_icon" name="first_name" value="" placeholder="First Name"-->
                          
@@ -128,30 +196,63 @@
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
-                         <input type="text" class="form-control email_icon" name="last_name" value="" placeholder="Last Name">
+                         <!--input type="text" class="form-control email_icon" name="last_name" value="" placeholder="Last Name"-->
+                         
+                         <?php
+                            echo $this->Form->input('Customer.last_name',array('class'=>'form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"Last Name")); 
+                        ?> 
+                         
+                         
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
-                         <input type="email" class="form-control email_icon" name="email" value="" placeholder="Email">
+                         <!--input type="email" class="form-control email_icon" name="email" value="" placeholder="Email"-->
+                         
+                         <?php
+                            echo $this->Form->input('Customer.customer_email',array('class'=>'form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"Email")); 
+                        ?> 
+                         
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
-                         <input type="password" class="form-control email_icon" name="password" value="" placeholder="Password">
+                         <!--input type="password" class="form-control email_icon" name="password" value="" placeholder="Password"-->
+                         
+                         <?php
+                            echo $this->Form->input('User.password',array('id'=>'UserPassword_2', 'class'=>'validate form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"Password",'name'=>'data[User][UserPassword_2]')); 
+                        ?> 
+                         
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
-                         <input type="password" class="form-control email_icon" name="conf_password" value="" placeholder="Confirm Password">
+                         <!--input type="password" class="form-control email_icon" name="conf_password" value="" placeholder="Confirm Password"-->
+                          <?php
+                            echo $this->Form->input('password',array( "equalto"=>"#UserPassword_2", 'class'=>'validate form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"Confirm Password","name"=>"data[User][confir_password]","id"=>'UserConfirPassword')); 
+                        ?> 
+                         
                          <div class="clearfix"></div>
                      </div>
                      <div class="input-group">
-                         <input type="text" class="form-control email_icon" name="phone" value="" placeholder="Phone Number">
+                         <!--input type="text" class="form-control email_icon" name="phone" value="" placeholder="Phone Number"-->
+                         
+                          <?php
+                            echo $this->Form->input('Customer.customer_phone',array('class'=>'form-control email_icon', 'autocomplete' => 'off','label' => false,'div' => false,'placeholder'=>"Phone Number")); 
+                        ?> 
+                         
                          <div class="clearfix"></div>
                      </div>
-                     <button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Sign up</button>
-                 </form>
+                     <!--button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Sign up</button-->
+                     <a  style="display:'none';" id="submitdata" class="close" data-dismiss="modal" aria-label="Close"></a>
+                     <?php 
+                        echo $this->Form->submit(__('Sign Up'), array('class' => 'btn registre_btn hvr-rectangle-out','id'=>'signupform')); 
+                     ?>
+                
+                    <?php
+                       echo $this->Form->end(); 
+                    ?>
+                 <!--/form-->
              </div>
              <div class="modal-footer text-center">
-                <p>Already have an account? <a href="#" data-toggle="modal" data-target="#demo-1" data-dismiss="modal">Log in</a></p>
+                <p>Already have an account? <a id="login" class="login" href="#" data-toggle="modal" data-target="#demo-1" data-dismiss="modal">Log in</a></p>
               </div>
               <div class="clearfix"></div>
            </div>
@@ -217,7 +318,7 @@
 
 			if( $(window).width() > 767 ) 
 				{
-					$(".leftsideBar").css({ "padding-top": navbar_height + 30 }); 
+					$(".leftsideBar").css({ "padding-top": navbar_height + 0 });
 
 					var leftsideBarHei = $(window).height() - ( $(".header").outerHeight() );
 					$(".leftsideBar_scroller").css("height",leftsideBarHei);
@@ -239,7 +340,7 @@
 
 		jQuery().ready(function() {
 
-
+/*
 			var signupvalidator = jQuery("#UserSignupForm").validate({
 				rules: {
 				   "data[Customer][first_name]": {
@@ -293,7 +394,7 @@
 
 				}
 			});
-
+*/
 
 			
 		    

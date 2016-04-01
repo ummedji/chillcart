@@ -17,7 +17,7 @@
 <div class="container-fluid home_parent">
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle  hidden-xs" data-toggle="collapse" data-target="#example-navbar-collapse">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
 				<img class="img-responsive-sm" style="width: 36px;" src="<?php echo $siteUrl.'/frontend/images/menu.png'; ?>">
 			</button>
 			<a class="navbar-brand" href="<?php echo $siteUrl.'/searches'; ?>">
@@ -25,7 +25,7 @@
 			</a>
 			<?php
 			if ($controllerName != 'checkouts') { ?>
-				<ul class="visible-xs visible-sm visible-md topnavRight">
+				<ul class="topnavRight">
 					<?php
 						if ($this->request->params['controller'] == 'searches' && $this->request->params['action'] == 'storeitems') {
 					?>
@@ -59,7 +59,7 @@
 		<ul class="search_bar nav navbar-nav text-center-xs text-center-sm <?php echo ($this->request->params['controller'] == 'searches' && $this->request->params['action'] == 'storeitems') ? '' : 'navbar-right'; ?> ">
 			<li class="dropdown menuDropdown">
 				<a href="javascript:void(0);" class="dropdown-toggle shopMenu" data-toggle="dropdown">
-					<div class="visible-xs"><?php echo __('Shopping in', true); ?> <?php echo $storeCity[$cityId]. ' '. $storeArea[$areaId]; ?> </div>
+					<div class="as_hide_xs"><?php echo __('Shopping in', true); ?> <?php echo $storeCity[$cityId]. ' '. $storeArea[$areaId]; ?> </div>
 					<span class="mobileStore"><?php echo $storeDetails['Store']['store_name']; ?> <span class="caret"></span></span>
 				</a>
 				<div class="dropdown-menu shopMenuDropdown">
@@ -126,12 +126,12 @@
 		</ul>
 		<?php
 		} ?>
-		<div class="collapse navbar-collapse" id="example-navbar-collapse">
+		<div class="collapse navbar-collapse as_top_header" id="example-navbar-collapse">
 			 <?php
 
 				if ($controllerName != 'checkouts') { ?>
 
-					<ul class="nav navbar-nav navbar-right hidden-sm hidden-md home-navbar-nav">
+					<ul class="nav navbar-nav navbar-right home-navbar-nav">
 						<?php
 							if ($this->request->params['controller'] == 'searches' &&
 								$this->request->params['action'] == 'storeitems') {
@@ -141,7 +141,7 @@
 								<?php echo $siteCurrency; ?>
 								<span class="cartTotal">0</span><span class="caret"></span></a>
 
-							<div class="cart_notification hidden-xs hidden-sm" style="display:none;">
+							<div class="cart_notification" style="display:none;">
 								<?php echo __('1 Item added to cart successfully.', true); ?>
 							</div>
 							<div class="cart_failedNotification hidden-xs hidden-sm" style="display:none;">
@@ -170,8 +170,8 @@
 							<li> <a href="<?php echo $siteUrl.'/customer/users/userLogout'; ?>"> <?php echo __('Logout', true); ?></a> </li> <?php
 						} else {?>
 
-							<li> <a href="#" data-toggle="modal" data-target="#demo-2"> <?php echo __('Sign Up', true); ?></a></li>
-							<li> <a href="#" data-toggle="modal" data-target="#demo-1"> <?php echo __('Login', true); ?></a> </li> <?php
+							<li> <a href="#" class="signup"  data-toggle="modal" data-target="#demo-2"> <?php echo __('Sign Up', true); ?></a></li>
+							<li> <a href="#" class="login" data-toggle="modal" data-target="#demo-1"> <?php echo __('Login', true); ?></a> </li> <?php
 						} ?>	
 						
 					</ul> <?php
@@ -180,4 +180,5 @@
 		</nav>
 	</div>
 </div>
+
 </header>

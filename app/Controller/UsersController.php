@@ -275,11 +275,19 @@ class UsersController extends AppController
             exit();
         }
 
-        if (!empty($this->request->data['Customer']['customer_email'])) {
+        
+        $first_name = $_POST["data"][1]["value"];
+        $last_name = $_POST["data"][2]["value"];
+        $email = $_POST["data"][3]["value"];
+        $password = $_POST["data"][4]["value"];
+        $confirm_password = $_POST["data"][5]["value"];
+        $phone_number = $_POST["data"][6]["value"];
+        
+        if (!empty($email)) {
             //$user  = $this->User->findByUsernameAndRoleId($this->request->data['Customer']['customer_email'],4);
 
             $user = $this->User->find('first', array(
-                'conditions' => array('User.username' => trim($this->request->data['Customer']['customer_email']),
+                'conditions' => array('User.username' => trim($email),
                     'User.role_id' => 4,
                     'NOT' => array('Customer.status' => 3))));
             if (!empty($user)) {
@@ -287,10 +295,16 @@ class UsersController extends AppController
                     array('class' => 'alert alert-danger'));
             } else {
                 $this->request->data['User']['role_id'] = 4;
-                $this->request->data['User']['username'] = $this->request->data['Customer']['customer_email'];
-                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+                $this->request->data['User']['username'] = $email;
+                $this->request->data['User']['password'] = $this->Auth->password($password);
                 $this->User->save($this->request->data['User'], null, null);
+                
+                
                 $this->request->data['Customer']['user_id'] = $this->User->id;
+                $this->request->data['Customer']['first_name'] = $first_name;
+                $this->request->data['Customer']['last_name'] = $last_name;
+                $this->request->data['Customer']['customer_email'] = $email;
+                $this->request->data['Customer']['customer_phone'] = $phone_number;
 
                 $this->Customer->save($this->request->data['Customer'], null, null);
                 //Mail Processing From Admin To Customer
@@ -309,8 +323,8 @@ class UsersController extends AppController
                 $userID = $this->Customer->id;
                 $siteUrl = $this->siteUrl;
                 $activation = $this->siteUrl . '/users/activeLink/' . $userID;
-                $customerName = $this->request->data['Customer']['first_name'];
-
+                $customerName = $first_name;
+ 
                 $store_name = $this->siteSetting['Sitesetting']['site_name'];
 
                 $mailContent = str_replace("{firstname}", $customerName, $mailContent);
@@ -324,11 +338,23 @@ class UsersController extends AppController
                 $email->template('register');
                 $email->emailFormat('html');
                 $email->viewVars(array('mailContent' => $mailContent, 'source' => $source));
-                $email->send();
-
-                $this->Session->setFlash('<p>' . __('You have successfully registered an account. An email has been sent with further instructions', true) . '</p>', 'default',
-                    array('class' => 'alert alert-success'));
-                $this->redirect(array('controller' => 'Users', 'action' => 'customerlogin', 'customer' => true));
+                
+               // $email->send();
+               // 
+               // if ($email->send()) {
+              //     echo 1;
+             //   } else {
+             //       echo 0;
+              //  }
+                
+               
+             //   die;
+                
+            //    $this->Session->setFlash('<p>' . __('You have successfully registered an account. An email has been sent with further instructions', true) . '</p>', 'default',
+              //      array('class' => 'alert alert-success'));
+                
+                 
+               // $this->redirect(array('controller' => 'Users', 'action' => 'customerlogin', 'customer' => true));
             }
         }
     }

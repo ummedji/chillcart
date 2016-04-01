@@ -800,5 +800,37 @@ footer ul li a:hover {
     }
 }
 /*end login css*/
-
-
+.topnavRight {
+    display: none;
+}
+.as_top_header .home-navbar-nav {
+    float: right !important;
+    text-align: right;
+}
+.as_top_header .home-navbar-nav > li {
+    float: none !important;
+    display: inline-block;
+}
+.home_parent .navbar-toggle:hover, .home_parent .navbar-toggle:focus {
+    background-color: transparent;
+}
+@media screen and (max-width:767px){
+    .as_top_header .home-navbar-nav {
+        background-color: rgba(0, 0, 0, 0.8);
+        /*position: absolute;
+        top: 50px;*/
+    }
+    .as_top_header {
+        position: absolute;
+        width: 100%;
+        top: 50px;
+        box-shadow: none;
+        z-index: 999;
+    }
+    .as_top_header .home-navbar-nav > li {
+        display: block;
+    }
+    .as_top_header .home-navbar-nav > li a {
+        padding: 5px 10px !important;
+    }
+}

@@ -173,8 +173,124 @@ $(document).ready(function () {
             return false;
         }
     });
+	
+	
+	var $forgotvalidator =  $("#UserSignupForm").validate({
+				rules: {
+				   "data[Customer][first_name]": {
+						required: true
+					},
+					"data[Customer][last_name]": {
+						required: true
+					},
+		            "data[Customer][customer_email]": {
+						required: true,
+		                email:true
+					},
+		            "data[User][UserPassword_2]": {
+						required: true
+		                
+					},
+		            "data[User][confir_password]": {
+						required: true
+					//	equalTo: '#UserPassword'
+					},
+		            "data[Customer][customer_phone]": {
+						required: true,
+						number : true
+					}
+				},
+				messages: { 
+				  "data[Customer][first_name]": {
+						required: "Please enter firstname",
+					},
+					"data[Customer][last_name]": {
+					required: "Please enter lastname",
+					},
+		            "data[Customer][customer_email]": {
+						required: "Please enter email",
+						email : "Please enter a valid email address",
+					},
+		            "data[User][password]": {
+					 	required: "Please enter password",
+		                
+					},
+		            "data[User][confir_password]": {
+						required: "Please enter confirm password",
+						//equalTo: "Please enter the same value again",		                
+					},
+		            "data[Customer][customer_phone]": {
+						required: "Please enter phone number",
+						number : "Please enter valid phone number",
+
+					}
+
+				}
+			});
+
+	
+	
+	
+	$("#UserSignupForm").submit(function(e){
+		
+		e.preventDefault();
+		
+		
+		if($("#UserSignupForm").valid()){
+			
+			var fromdata = $(this).serializeArray();
+			$.post(rp + 'signup', {data : fromdata}, function (response) {
+				
+				$("div.login_logo h3").after("<span class='success_msg' style='color:green;'>Please check your email and activate your account. </span>");
+				
+				setTimeout(after_submit_signupform,2000);
+				
+			});
+			
+		} else{
+			return false;
+		}
+	});
+	
+	$("#forgot_password").on("click",function(){
+	
+		$("div#loginform").css("display","none");
+		$("div#forgotform").css("display","block");
+		
+	});
+	
+	$(".login").on("click",function(){
+	
+		$("div#loginform").css("display","block");
+		$("div#forgotform").css("display","none");
+		
+	});
+	
 
 });
+
+
+$("body").on("mouseover",".product__inner",function(){
+$(this).find("div.as_inlist").css( "display", "block" );
+});
+
+$("body").on("mouseout",".product__inner",function(){
+$(this).find("div.as_inlist").css( "display", "none" );
+});
+
+function after_submit_signupform(){
+
+	$("#UserSignupForm input#CustomerFirstName").val("");
+	$("#UserSignupForm input#CustomerLastName").val("");
+	$("#UserSignupForm input#CustomerCustomerEmail").val("");
+	$("#UserSignupForm input#UserPassword_2").val("");
+	$("#UserSignupForm input#UserConfirPassword").val("");
+	$("#UserSignupForm input#CustomerCustomerPhone").val("");
+	$("span.success_msg").remove();
+	
+	$("a#submitdata").trigger("click");
+	
+}
 
 function locationList() {
     var id = $('#city').val();
