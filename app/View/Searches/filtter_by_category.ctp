@@ -155,11 +155,11 @@ if ($value['SubCategory']['id'] != $subCat) {
 										
 										<div class="as_inlist" style="display:none;">
 											<div class="size-buttons_as">
-												<button class="minus-button">
+												<button id="minus_button_<?php echo $value['ProductDetail'][0]['id']; ?>" class="minus-button">
 												  <i class="fa fa-minus"></i>
 												</button>
-												<em class="ic-number">0</em>
-												<button onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
+												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">0</em>
+												<button id="add_button_<?php echo $value['ProductDetail'][0]['id']; ?>" onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
 											</div>
@@ -181,11 +181,11 @@ if ($value['SubCategory']['id'] != $subCat) {
 								
 										<div class="as_inlist" style="display:none;">
 											<div class="size-buttons_as">
-												<button class="minus-button">
+												<button id="minus_button_<?php echo $value['ProductDetail'][0]['id']; ?>" class="minus-button">
 												  <i class="fa fa-minus"></i>
 												</button>
-												<em class="ic-number">0</em>
-												<button onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
+												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">0</em>
+												<button id="add_button_<?php echo $value['ProductDetail'][0]['id']; ?>" onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
 											</div>

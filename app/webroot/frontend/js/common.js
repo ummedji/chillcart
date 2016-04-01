@@ -300,6 +300,7 @@ function locationList() {
 }
 
 
+
 function productDetails(id) {
     $.post(rp + 'searches/productdetails', {'id': id}, function (response) {
         var data = response.split("||@@||");
@@ -335,6 +336,20 @@ function addToCart(id) {
 
         if (response == 'Success') {
             cart();
+            
+            var em_value = $("em#em_"+id).text();
+   
+            var new_em_value = parseInt($.trim(em_value))+1;
+
+            $("em#em_"+id).text(new_em_value);
+
+            if(new_em_value == 1){
+
+                $("button#minus_button_"+id).attr("onclick","qtyDecrement("+id+");");
+
+            }
+            
+            
             $('.cart_notification').fadeIn();
             setTimeout(function () {
                 $('.cart_notification').fadeOut();
@@ -446,6 +461,19 @@ function deleteCart(id) {
 function qtyIncrement(id) {
     $.post(rp + 'searches/qtyUpdate', {'id': id, 'type': 'increment'}, function (response) {
         cart();
+        
+        var em_value = $("em#em_"+id).text();
+   
+        var new_em_value = parseInt($.trim(em_value))+1;
+
+        $("em#em_"+id).text(new_em_value);
+
+        if(new_em_value == 1){
+
+            $("button#minus_button_"+dataid).attr("onclick","qtyDecrement("+dataid+");");
+
+        }
+        
     });
 }
 
@@ -453,7 +481,20 @@ function qtyIncrement(id) {
 function qtyDecrement(id) {
     $.post(rp + 'searches/qtyUpdate', {'id': id, 'type': 'decrement'}, function (response) {
         cart();
-    });
+        
+        var em_value = $("em#em_"+id).text();
+   
+        var new_em_value = parseInt($.trim(em_value))-1;
+
+        $("em#em_"+id).text(new_em_value);
+
+        if(new_em_value == 0){
+
+            $("button#minus_button_"+id).removeAttr("onclick");
+
+        }
+
+     });
 }
 
 function changeLocation() {
@@ -622,3 +663,19 @@ $(window).load(function () {
 
 
 });
+
+function increase_data_count(dataid){
+  
+   var em_value = $("em#em_"+dataid).text();
+   
+   var new_em_value = parseInt($.trim(em_value))+1;
+   
+   $("em#em_"+dataid).text(new_em_value);
+   
+   if(new_em_value == 1){
+       
+       $("button#minus_button_"+dataid).attr("onclick","qtyDecrement("+dataid+");");
+       
+   }
+    
+}
