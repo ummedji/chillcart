@@ -159,7 +159,7 @@ if ($value['SubCategory']['id'] != $subCat) {
 												  <i class="fa fa-minus"></i>
 												</button>
 												<em class="ic-number">0</em>
-												<button>
+												<button onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
 											</div>
@@ -185,7 +185,7 @@ if ($value['SubCategory']['id'] != $subCat) {
 												  <i class="fa fa-minus"></i>
 												</button>
 												<em class="ic-number">0</em>
-												<button>
+												<button onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
 											</div>
