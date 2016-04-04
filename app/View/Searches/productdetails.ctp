@@ -71,7 +71,7 @@
 					<?php
 					if ($productDetails['Product']['price_option'] != 'single') {  ?>
 						<div class="varient_height">
-							<select class="form-control margin-t-15" id="productVariant" onchange="variantDetails();"> <?php
+							<select class="form-control margin-t-15" id="productVariant ummed" onchange="variantDetails();"> <?php
 								foreach ($productDetails['ProductDetail'] as $key => $value) { ?>
 									<option value="<?php echo $value['id']; ?>"><?php echo $value['sub_name']; ?></option> <?php
 								} ?>

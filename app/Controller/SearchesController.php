@@ -484,9 +484,44 @@ class SearchesController extends AppController
             $shopCart['ShoppingCart']['product_total_price'] = $shopCart['ShoppingCart']['product_price'] * $shopCart['ShoppingCart']['product_quantity'];
 
             $this->ShoppingCart->save($shopCart, null, null);
+           
+            echo $shopCart['ShoppingCart']['product_id'];
+            die;
 
         }
         exit();
+    }
+    
+    public function product_qtyUpdate(){
+        
+        $id = $this->request->data['id'];
+        $type = $this->request->data['type'];
+
+        
+        $shopCart = $this->ShoppingCart->find('all', array(
+            'conditions' => array('ShoppingCart.session_id' => $this->SessionId,'ShoppingCart.product_id' => $id ),
+            ));
+        
+
+        if ($type == 'increment') {
+            $shopCart[0]['ShoppingCart']['product_quantity'] = $shopCart[0]['ShoppingCart']['product_quantity']+1;
+        } else {
+            $shopCart[0]['ShoppingCart']['product_quantity'] = $shopCart[0]['ShoppingCart']['product_quantity']-1;
+        }
+       
+        
+        if ($shopCart[0]['ShoppingCart']['product_quantity'] <= $shopCart[0]['ProductDetail']['quantity'] &&
+            $shopCart[0]['ShoppingCart']['product_quantity'] != 0
+        ) {
+
+            $shopCart[0]['ShoppingCart']['product_total_price'] = $shopCart[0]['ShoppingCart']['product_price'] * $shopCart[0]['ShoppingCart']['product_quantity'];
+
+            $this->ShoppingCart->save($shopCart[0], null, null);
+
+        }
+        
+        exit();
+        
     }
 
     public function locations()
@@ -608,11 +643,43 @@ class SearchesController extends AppController
             'conditions' => array('Category.status' => 1,
                 'OR' => array('Category.id' => $subCategory))));
 
+       
+        $shopCart_data = array();
+
+        if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"] != ""){
+            $shopCart_data = $this->ShoppingCart->find('all', array(
+                    'conditions' => array('ShoppingCart.session_id' => $_COOKIE["PHPSESSID"])
+                    ));
+        }
+ 
+        
         $this->set(compact('storeList', 'productList', 'storeDetails', 'mainCategoryList',
             'subCategoryList', 'storeId', 'dealProduct', 'metaTitle',
-            'metakeywords', 'metaDescriptions'));
+            'metakeywords', 'metaDescriptions','shopCart_data'));
     }
     
+    public function get_productdetails(){
+        
+        $id = $this->request->data['id'];
+         
+        $shopCart_quantity_data = 0;
+
+        if(isset($_COOKIE["PHPSESSID"]) && $_COOKIE["PHPSESSID"] != ""){
+            $shopCart_data = $this->ShoppingCart->find('all', array(
+                    'conditions' => array('ShoppingCart.session_id' => $_COOKIE["PHPSESSID"],'ShoppingCart.product_id' => $id )
+                    ));
+            if(!empty($shopCart_data)){
+                $shopCart_quantity_data = $shopCart_data[0]["ShoppingCart"]["product_quantity"];
+                    
+            }
+            
+        }
+        echo $shopCart_quantity_data;
+        die;
+        
+    }
+
+
     
     public function termsconditions(){
          $this->layout = 'frontend';

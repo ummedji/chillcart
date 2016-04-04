@@ -59,7 +59,7 @@ if ($value['SubCategory']['id'] != $subCat) {
                         <a href="javascript:void(0);" rel="tag">
 						
 						<?php 
-						
+					/*	
 						$product_name = $value['ProductDetail'][0]['sub_name']; 
 						
 						$quantity = explode(" ",$product_name);
@@ -74,7 +74,8 @@ if ($value['SubCategory']['id'] != $subCat) {
 						{
 							echo html_entity_decode($this->Number->currency($value['ProductDetail'][0]['orginal_price'], $siteCurrency))." / ".$quantity_value."g";
 						}
-					/*
+                                                
+					
                         if ($value['ProductDetail'][0]['compare_price'] != 0) {
                             echo '<del><span class="amount">'. html_entity_decode($this->Number->currency($value['ProductDetail'][0]['orginal_price'], $siteCurrency)).'</span></del>';
                             echo '<ins class="margin-l-5"><span class="amount">'.html_entity_decode($this->Number->currency($value['ProductDetail'][0]['compare_price'], $siteCurrency)).'</span></ins>';
@@ -84,16 +85,83 @@ if ($value['SubCategory']['id'] != $subCat) {
 						*/
 						
 						?>
-						<select>
-						  <option>$2.99 / 125g</option>
-						  <option>$2.99 / 125g</option>
-						  <option>$2.99 / 125g</option>
+                            
+                            <?php
+					if ($value['Product']['price_option'] != 'single') {  
+                            ?>
+						<select id="select_product_<?php echo $value['ProductDetail'][0]['id']; ?>" class="select_product_data" >
+                                                    
+                                       <?php
+					foreach ($value['ProductDetail'] as $pr_key => $pr_value) { 
+                                            
+                                                $product_name = $pr_value['sub_name']; 
+                                                
+						//echo $product_name."</br>";
+                                                
+						$quantity = explode(" ",$product_name);
+						$get_key =array_search ('Grams', $quantity);
+						
+						$quantity_value = $quantity[$get_key-1];
+						
+						if ($pr_value['compare_price'] != 0) {
+                                                    ?>
+                                                    
+                                                    <option value="<?php echo $pr_value['id']; ?>"><?php 
+                                                    
+                                                    echo '<del><span class="amount">'.html_entity_decode($this->Number->currency($pr_value['orginal_price'], $siteCurrency)).'</span></del>'." ".html_entity_decode($this->Number->currency($pr_value['compare_price'], $siteCurrency))." / ". $quantity_value."g";
+                                                    
+                                                    ?></option> 
+                                                  <?php  
+							
+						}
+						else
+						{
+                                                    
+                                                    ?>
+                                                    <option value="<?php echo $pr_value['id']; ?>"><?php 
+                                                    
+                                                    echo html_entity_decode($this->Number->currency($pr_value['orginal_price'], $siteCurrency))." / ".$quantity_value."g";
+                                                    
+                                                    ?></option> 
+                                                    <?php
+                                                    
+							
+						}
+                                            
+                                            ?>
+						
+                                        <?php } ?>
+						  
+                                                  
 						</select>
+                            
+                                        <?php }else{ 
+                                                
+                            
+                                        $product_name = $value['ProductDetail'][0]['sub_name']; 
+						
+						$quantity = explode(" ",$product_name);
+						$get_key =array_search ('Grams', $quantity);
+						
+						$quantity_value = $quantity[$get_key-1];
+						
+						if ($value['ProductDetail'][0]['compare_price'] != 0) {
+							echo '<del><span class="amount">'.html_entity_decode($this->Number->currency($value['ProductDetail'][0]['orginal_price'], $siteCurrency)).'</span></del>'." ".html_entity_decode($this->Number->currency($value['ProductDetail'][0]['compare_price'], $siteCurrency))." / ". $quantity_value."g";
+						}
+						else
+						{
+							echo html_entity_decode($this->Number->currency($value['ProductDetail'][0]['orginal_price'], $siteCurrency))." / ".$quantity_value."g";
+						}
+                            
+                                            
+                                        } ?>
+                            
+                            
 						</a>
                     </div>
 
                     <?php if ($value['ProductDetail'][1]['sub_name']) { ?>
-                        <div class="show-on-hover">
+                  <!--      <div class="show-on-hover">
                             <?php foreach ($value['ProductDetail'] as $keyVal => $val) {
                                 if ($keyVal != 0) { ?>
                                     <div class="yith-wcwl-add-to-wishlist">
@@ -124,7 +192,7 @@ if ($value['SubCategory']['id'] != $subCat) {
                             } ?>
 
 
-                        </div>
+                        </div>  -->
                     <?php } ?>
 
 
@@ -146,10 +214,10 @@ if ($value['SubCategory']['id'] != $subCat) {
 
            			</span>
                     <div class="product__detail-action new_add_to_cart">
-                        <a href="javascript:void(0);" rel="nofollow" class="button add_to_cart_button " >
+                        <!--a href="javascript:void(0);" rel="nofollow" class="button add_to_cart_button " -->
                             <?php if ($value['Product']['price_option'] == 'single') { //echo "<pre>";print_r($value);die();
                                 if($value['ProductDetail'][0]['quantity'] != 0){?>
-                                    <!--  <span class="prodAddprice ummed" onclick="addToCart(<?php //echo $value['ProductDetail'][0]['id']; ?>);" >
+                                    <!--  <span class="prodAddprice" onclick="addToCart(<?php //echo $value['ProductDetail'][0]['id']; ?>);" >
 										<b class=""><?php //echo __('Add'); ?></b> <i class="fa fa-plus plushide"></i></span> -->
 										
 										
@@ -158,7 +226,34 @@ if ($value['SubCategory']['id'] != $subCat) {
 												<button id="minus_button_<?php echo $value['ProductDetail'][0]['id']; ?>" class="minus-button">
 												  <i class="fa fa-minus"></i>
 												</button>
-												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">0</em>
+												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">
+                                                                                                    
+                                                                                              <?php 
+                                                                                              
+                                                                                              if(!empty($shopCart_data)){
+                                                                                                
+                                                                                                  
+                                                                                                  $found = false;
+                                                    foreach ($shopCart_data as $key => $data) {
+                                                        if ($data["ShoppingCart"]["product_id"] == $value['ProductDetail'][0]['id']) {
+                                                            // The item has been found => add the new points to the existing ones
+                                                            echo  trim($data["ShoppingCart"]["product_quantity"]);
+                                                            $found = true;
+                                                            break; // no need to loop anymore, as we have found the item => exit the loop
+                                                        }
+                                                    }
+
+                                                    if ($found === false) {
+
+                                                         echo trim(0);
+
+                                                    }
+                                                                                             }else{
+                                                                                                 echo trim(0);
+                                                                                             }
+                                                                                              
+                                                                                              ?>      
+                                                                                                </em>
 												<button id="add_button_<?php echo $value['ProductDetail'][0]['id']; ?>" onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
@@ -176,7 +271,7 @@ if ($value['SubCategory']['id'] != $subCat) {
                                 <?php }
 
                             } else { ?>
-                                <!-- <span class="prodAddprice ummed" onclick="productDetails(<?php //echo $value['Product']['id']; ?>);" ><b class=""><?php //echo __('Add'); ?></b> <<i class="fa fa-plus plushide"></i>></span> -->
+                                <!-- <span class="prodAddprice" onclick="productDetails(<?php //echo $value['Product']['id']; ?>);" ><b class=""><?php //echo __('Add'); ?></b> <<i class="fa fa-plus plushide"></i>></span> -->
 								
 								
 										<div class="as_inlist" style="display:none;">
@@ -184,7 +279,35 @@ if ($value['SubCategory']['id'] != $subCat) {
 												<button id="minus_button_<?php echo $value['ProductDetail'][0]['id']; ?>" class="minus-button">
 												  <i class="fa fa-minus"></i>
 												</button>
-												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">0</em>
+												<em id="em_<?php echo $value['ProductDetail'][0]['id']; ?>" class="ic-number">
+                                                       <?php 
+                                                                                              
+                                                                                              if(!empty($shopCart_data)){
+                                                                                                
+                                                                                                  
+                                                                                                   $found = false;
+                                                    foreach ($shopCart_data as $key => $data) {
+                                                        if ($data["ShoppingCart"]["product_id"] == $value['ProductDetail'][0]['id']) {
+                                                            // The item has been found => add the new points to the existing ones
+                                                            echo  trim($data["ShoppingCart"]["product_quantity"]);
+                                                            $found = true;
+                                                            break; // no need to loop anymore, as we have found the item => exit the loop
+                                                        }
+                                                    }
+
+                                                    if ($found === false) {
+                                                         echo trim(0);
+                                                    }
+    
+                                                                                                
+                                                                                             }else{
+                                                                                                 echo trim(0);
+                                                                                             }
+                                                                                              
+                                                                                              ?>                                                
+                                                                                                
+                                                                                                
+                                                                                                </em>
 												<button id="add_button_<?php echo $value['ProductDetail'][0]['id']; ?>" onclick="addToCart(<?php echo $value['ProductDetail'][0]['id']; ?>);">
 												  <i class="fa fa-plus plushide"></i>
 												</button>
@@ -197,7 +320,7 @@ if ($value['SubCategory']['id'] != $subCat) {
                             } ?>
 
                             <!--<i class="fa fa-plus plushide"></i>-->
-                        </a>
+                        <!--/a-->
 
                     </div>
                 </div>

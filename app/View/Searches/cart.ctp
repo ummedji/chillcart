@@ -64,7 +64,7 @@ foreach ($storeCart as $key => $value) {
 						<td class="qty"> <?php
 
 							if ($value['ShoppingCart']['product_quantity'] < $value['ProductDetail']['quantity']) { ?>
-								<a class="change-qty qty-inc pointer" onclick="qtyIncrement(<?php echo $value['ShoppingCart']['id']; ?>)" >
+                                                    <a rel="<?php echo $value['ShoppingCart']['product_id']; ?>" class="change-qty qty-inc pointer" onclick="qtyIncrement(<?php echo $value['ShoppingCart']['id']; ?>)" >
 									<i class="fa fa-caret-up"></i>
 								</a> <?php
 							} else { ?>
@@ -78,7 +78,7 @@ foreach ($storeCart as $key => $value) {
 							<div><?php echo $value['ShoppingCart']['product_quantity']; ?></div> <?php
 
 							if ($value['ShoppingCart']['product_quantity'] != 1) { ?>
-								<a class="change-qty qty-dec pointer" onclick="qtyDecrement(<?php echo $value['ShoppingCart']['id']; ?>)">
+								<a rel="<?php echo $value['ShoppingCart']['product_id']; ?>" class="change-qty qty-dec pointer" onclick="qtyDecrement(<?php echo $value['ShoppingCart']['id']; ?>)">
 									<i class="fa fa-caret-down"></i>
 								</a> <?php
 							} else { ?>
@@ -124,7 +124,7 @@ foreach ($storeCart as $key => $value) {
 							<div class="margin-t-15">
 								<span class="price-cell"><?php echo html_entity_decode($this->Number->currency($value['ShoppingCart']['product_total_price'], $siteCurrency)); ?>
 								</span>
-								<span class="remove-cell"><a class="remove-item pointer" onclick="deleteCart(<?php echo $value['ShoppingCart']['id']; ?>)">×</a></span>
+								<span class="remove-cell"><a class="remove-item pointer" onclick="deleteCart(<?php echo $value['ShoppingCart']['id']; ?>,<?php echo $value['ShoppingCart']['product_id']; ?>)">×</a></span>
 							</div>
 						</td>
 					</tr> <?php
