@@ -77,11 +77,21 @@ foreach ($storeCart as $key => $value) {
 
 							<div><?php echo $value['ShoppingCart']['product_quantity']; ?></div> <?php
 
-							if ($value['ShoppingCart']['product_quantity'] != 1) { ?>
+							if ($value['ShoppingCart']['product_quantity'] > 1) { ?>
 								<a rel="<?php echo $value['ShoppingCart']['product_id']; ?>" class="change-qty qty-dec pointer" onclick="qtyDecrement(<?php echo $value['ShoppingCart']['id']; ?>)">
 									<i class="fa fa-caret-down"></i>
 								</a> <?php
-							} else { ?>
+							} 
+                                                        elseif($value['ShoppingCart']['product_quantity'] == 1){
+                                                            ?>
+                                                        
+                                                        <a rel="<?php echo $value['ShoppingCart']['product_id']; ?>" class="change-qty qty-dec pointer" onclick="deleteCart(<?php echo $value['ShoppingCart']['id']; ?>,<?php echo $value['ShoppingCart']['product_id']; ?>);">
+									<i class="fa fa-caret-down"></i>
+								</a>
+                                                        
+                                                        <?php
+                                                        }
+                                                        else { ?>
 								<a class="change-qty qty-dec">
 									<i class="fa fa-caret-down"></i>
 								</a> <?php

@@ -362,8 +362,8 @@ function addToCart(id) {
     //alert(id);
     //return false;
     $.post(rp + 'searches/cartProduct', {'id': id, 'quantity': '1'}, function (response) {
-
-        if (response == 'Success') {
+           
+        if (response != 0) {
             cart();
             $('.cart_notification').fadeIn();
             setTimeout(function () {
@@ -373,9 +373,16 @@ function addToCart(id) {
             var em_value = $("em#em_"+id).text();
             var new_em_value = parseInt($.trim(em_value))+1;
             $("em#em_"+id).text(new_em_value);
-            if(new_em_value == 2){
+            if(new_em_value > 1){
                  $("button#minus_button_"+id).attr("onclick","product_qtyDecrement("+id+");");
             }
+            if(new_em_value == 1){
+                 $("button#minus_button_"+id).attr("onclick","deleteCart("+response+","+id+");");
+            }
+            
+            //if(new_em_value == 1){
+            //     $("button#minus_button_"+response).attr("onclick","deleteCart("+id+","+response+");");
+           // }
             
 
         } else {
@@ -495,6 +502,9 @@ function qtyIncrement(id) {
             if(new_em_value == 2){
                  $("button#minus_button_"+response).attr("onclick","qtyDecrement("+response+");");
             }
+            if(new_em_value == 1){
+                 $("button#minus_button_"+response).attr("onclick","deleteCart("+id+","+response+");");
+            }
         
     });
 }
@@ -507,9 +517,14 @@ function qtyDecrement(id) {
             var em_value = $("em#em_"+response).text();
             var new_em_value = parseInt($.trim(em_value))-1;
             $("em#em_"+response).text(new_em_value);
-            if(new_em_value <= 1){
+            if(new_em_value < 1){
                  $("button#minus_button_"+response).removeAttr("onclick");
             }
+            
+             if(new_em_value == 1){
+                 $("button#minus_button_"+response).attr("onclick","deleteCart("+id+","+response+");");
+            }
+            
 		
     });
 }
@@ -522,8 +537,13 @@ function product_qtyDecrement(id){
             var em_value = $("em#em_"+id).text();
             var new_em_value = parseInt($.trim(em_value))-1;
             $("em#em_"+id).text(new_em_value);
-            if(new_em_value <= 1){
+            if(new_em_value < 1){
                  $("button#minus_button_"+id).removeAttr("onclick");
+            }
+            
+             if(new_em_value == 1){
+                 
+                 $("button#minus_button_"+id).attr("onclick","deleteCart("+response+","+id+");");
             }
 		
     });

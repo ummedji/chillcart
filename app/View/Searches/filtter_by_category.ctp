@@ -46,11 +46,11 @@ if ($value['SubCategory']['id'] != $subCat) {
             <figure class="product__image" onclick="productDetails(<?php echo $value['Product']['id']; ?>);">
                 <!-- <span class="onsale">Sale!</span> -->
                 <img src="<?php echo $imageSrc; ?>" onerror="this.onerror=null;this.src='<?php echo $siteUrl."/images/no-imge.jpg"; ?>'" alt="<?php echo $value['Product']['product_name']; ?>" title="<?php echo $value['Product']['product_name']; ?>">
-                <figcaption>
+                <!--figcaption>
                     <div class="product-addon">
                         <a href="javascript:void(0);" class="yith-wcqv-button"><span></span><i class="fa fa-plus"></i></a>
                     </div>
-                </figcaption>
+                </figcaption-->
             </figure>
             <div class="product__detail">
                 <div class="top-section">

@@ -344,6 +344,8 @@ class SearchesController extends AppController
     public function cartProduct()
     {
 
+        $result = 0;
+        
         $id = $this->request->data['id'];
         $quantity = $this->request->data['quantity'];
 
@@ -386,11 +388,16 @@ class SearchesController extends AppController
                 $shoppingCart['product_total_price'] = $shoppingCart['product_price'] * $quantity;
 
                 if ($this->ShoppingCart->save($shoppingCart, null, null)) {
-                    echo 'Success';
+                   // echo 'Success';
+                   echo $result = $this->ShoppingCart->id;
+                    
+                   die;
                 }
             }
         } else {
 
+            
+            
             $productQuantity = $shopCart['ShoppingCart']['product_quantity'] + $quantity;
 
             if ($productQuantity <= $productDetails['ProductDetail']['quantity']) {
@@ -400,10 +407,15 @@ class SearchesController extends AppController
                 $shoppingCart['ShoppingCart']['product_total_price'] = $shoppingCart['ShoppingCart']['product_price'] * $productQuantity;
 
                 if ($this->ShoppingCart->save($shoppingCart, null, null)) {
-                    echo 'Success';
+                    //echo 'Success';
+                    
+                   echo $result = $this->ShoppingCart->id;
+                   die;
+                    
                 }
             }
         }
+        echo $result;
         exit();
     }
 
@@ -518,6 +530,11 @@ class SearchesController extends AppController
 
             $this->ShoppingCart->save($shopCart[0], null, null);
 
+           echo $result = $this->ShoppingCart->id;
+            // echo $shopCart[0]['ShoppingCart']['product_id'];
+            die;
+
+            
         }
         
         exit();
