@@ -74,7 +74,7 @@
                <!--form-->
                
                <?php
-                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/customerlogin'));
+                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/customerlogin','id'=>'UserLoginForm'));
                ?>
                
                    <div class="input-group">
@@ -98,9 +98,9 @@
                    <!--button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Log In</button-->
                    
                    
-                   <?php echo $this->Form->submit(__('Log In'), array('class' => 'btn registre_btn hvr-rectangle-out'));?>
+                   <?php echo $this->Form->submit(__('Log In'), array('class' => 'btn registre_btn hvr-rectangle-out','id'=>'loginform'));?>
                    
-                   <?php echo $this->Form->end(); ?>
+                  
                    
                <!--/form-->
            </div>
@@ -108,8 +108,9 @@
              <div class="checkbox">
                 <!--input id="checkbox1" name="remember_me" class="styled" type="checkbox"-->
                 
+                <input id="remember_me" name="data[User][rememberMe]" class="styled" type="checkbox" />
                 <?php
-                echo $this->Form->input("rememberMe",array('id'=>'remember_me','type'=>'checkbox','label'=>false,'div' =>false));
+              //  echo $this->Form->input("rememberMe",array('id'=>'remember_me','type'=>'checkbox','label'=>false,'div' =>false));
                 ?>
                 
                 <label for="checkbox1">Remember me</label>
@@ -117,6 +118,8 @@
              <div class="clearfix"></div>
            </div>
              
+               <?php echo $this->Form->end(); ?>
+              
              </div>
              
              
@@ -129,14 +132,14 @@
                <!--form-->
                
                <?php
-                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/Forgot'));
+                    echo $this->Form->create('User', array('class' => 'login-form','url'=>'/customerlogin', 'id'=>'forgetmail'));
                ?>
                
                    <div class="input-group">
                        <!--input type="email" class="form-control email_icon" name="login" value="" placeholder="Email Address"-->
                        
                        <?php
-                             echo $this->Form->input('username',array('label' => false,  'placeholder' => __('Email Address'),  'class'=>'form-control email_icon',  'autocomplete' => 'off',  'div' => false)); 
+                             echo $this->Form->input('username',array('label' => false,  'placeholder' => __('Email Address'),  'class'=>'form-control email_icon','name'=>'data[Users][email]',  'autocomplete' => 'off',  'div' => false)); 
                        ?>
                        
                        <div class="clearfix"></div>
@@ -145,7 +148,7 @@
                    <!--button type="button" class="btn registre_btn hvr-rectangle-out" name="log-me-in" id="login_btn">Log In</button-->
                    
                    
-                   <?php echo $this->Form->submit(__('Submit'), array('class' => 'btn registre_btn hvr-rectangle-out'));?>
+                   <?php echo $this->Form->submit(__('Submit'), array('class' => 'btn registre_btn hvr-rectangle-out','id'=>'submit_forgetmail'));?>
                    
                    <?php echo $this->Form->end(); ?>
                    
@@ -162,8 +165,8 @@
               <hr>
            </div>
            <div class="social_space">
-             <button type="button" class="btn facebook_btn hvr-push">Connect with Facebook</button>
-             <button type="button" class="btn google_btn hvr-push gplogin">Connect with Google</button>
+            <a class="facebook" href="<?php echo $siteUrl.'/users/social_login/Facebook'; ?>"><button type="button" class="btn facebook_btn hvr-push">Connect with Facebook</button></a>
+              <a class="googleplus" href="<?php echo $siteUrl.'/users/social_login/Google'; ?>"><button type="button" class="btn google_btn hvr-push gplogin">Connect with Google</button></a>
            </div>
 
            <div class="modal-footer text-center">
@@ -339,86 +342,7 @@
 
 
 		jQuery().ready(function() {
-
-/*
-			var signupvalidator = jQuery("#UserSignupForm").validate({
-				rules: {
-				   "data[Customer][first_name]": {
-						required: true,
-					},
-					"data[Customer][last_name]": {
-						required: true,
-					},
-		            "data[Customer][customer_email]": {
-						required: true,
-		                email:true,
-					},
-		            "data[User][password]": {
-						required: true,
-		                
-					},
-		            "data[User][confir_password]": {
-						required: true,
-						equalTo: '#UserPassword'
-		                
-					},
-		            "data[Customer][customer_phone]": {
-						required: true,
-						number : true
-					}
-				},
-				messages: { 
-				  "data[Customer][first_name]": {
-						required: "<?php echo __('Please enter firstname'); ?>",
-					},
-					"data[Customer][last_name]": {
-					required: "<?php echo __('Please enter lastname'); ?>",
-					},
-		            "data[Customer][customer_email]": {
-						required: "<?php echo __('Please enter email'); ?>",
-						email : "<?php echo __('Please enter a valid email address'); ?>",
-					},
-		            "data[User][password]": {
-					 	required: "<?php echo __('Please enter password'); ?>",
-		                
-					},
-		            "data[User][confir_password]": {
-						required: "<?php echo __('Please enter confirm password'); ?>",
-						equalTo: "<?php echo __('Please enter the same value again'); ?>",		                
-					},
-		            "data[Customer][customer_phone]": {
-						required: "<?php echo __('Please enter phone number'); ?>",
-						number : "<?php echo __('Please enter valid phone number'); ?>",
-
-					}
-
-				}
-			});
-*/
-
-			
-		    
-		    var loginvalidator = jQuery("#UserCustomerCustomerloginForm").validate({
-				rules: {
-					"data[User][username]": {
-						required: true,
-						email :true,
-					},
-		            "data[User][password]": {
-						required: true,
-					}
-				},
-				messages: { 
-					"data[User][username]": {
-						required: "<?php echo __('Please enter email'); ?>",
-						email : "<?php echo __('Please enter a valid email address'); ?>",
-					},
-		            "data[User][password]": {
-						required: "<?php echo __('Please enter password'); ?>",
-					}
-
-				}
-			});
+                 
 
 			var changepasswordvalidator = jQuery("#CustomerChangePasswordForm").validate({
 				rules: {
@@ -449,7 +373,8 @@
 				}
 			});
 
-			var loginForgetmailvalidator = jQuery("#forgetmail").validate({
+
+		/*	var loginForgetmailvalidator = jQuery("#forgetmail").validate({
 				rules: {
 					"data[Users][email]": {
 						required: true,
@@ -464,6 +389,8 @@
 
 				}
 			});
+                        
+                        */
 
 			var Profilevalidator = jQuery("#CustomerCustomerMyaccountForm").validate({
 				rules: {

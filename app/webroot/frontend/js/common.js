@@ -252,6 +252,116 @@ $(document).ready(function () {
 		}
 	});
 	
+        
+          var loginvalidator = jQuery("#UserLoginForm").validate({
+				rules: {
+					"data[User][username]": {
+						required: true,
+						email :true,
+					},
+		            "data[User][password]": {
+						required: true,
+					}
+				},
+				messages: { 
+					"data[User][username]": {
+						required: "Please enter email",
+						email : "Please enter a valid email address",
+					},
+		            "data[User][password]": {
+						required: "Please enter password",
+					}
+
+				}
+			});
+                        
+                        
+            $("#UserLoginForm").submit(function(e){
+		
+		e.preventDefault();
+		
+		if($("#UserLoginForm").valid()){
+			
+                        var rember_me = 0;
+                        if ($('#remember_me').is(":checked"))
+                        {
+                          $('#remember_me').val(1);
+                        }
+                        
+			var fromdata = $(this).serializeArray();
+                        
+			$.post(rp + 'customerlogin', {data : fromdata}, function (response) {
+				
+                                $("span.success_msg").remove();
+                                
+                                if(response == "unathorized_error"){
+                                    $("div.login_logo h3").after("<span class='success_msg' style='color:red;'>Login failed, unauthorized.</span>");
+                                }
+                                else if(response == "data_incorrect_error"){
+                                    $("div.login_logo h3").after("<span class='success_msg' style='color:red;'>Login failed your Username or Password Incorrect.</span>");
+                                }
+                                else{
+                                    window.location.href = rp+"customer/customers/myaccount";
+                                }
+                                
+				setTimeout(remove_message,2000);
+				
+			});
+                            
+		} else{
+			return false;
+		}
+	});
+           
+                
+        var loginForgetmailvalidator = jQuery("#forgetmail").validate({
+                    rules: {
+                            "data[Users][email]": {
+                                    required: true,
+                                    email :true,
+                            }
+                    },
+                    messages: {
+                            "data[Users][email]": {
+                                    required: "Please enter email.",
+                                    email : "Please enter a valid email address.",
+                            }
+                    }
+            }); 
+        
+        
+        $("#forgetmail").submit(function(e){
+		
+		e.preventDefault();
+                
+		if($("#forgetmail").valid()){
+			
+			var fromdata = $(this).serializeArray();
+                        
+			$.post(rp + 'customerlogin', {data : fromdata}, function (response) {
+				
+                                remove_message();
+                                if(response == "not_registered_error"){
+				$("div.login_logo h3").after("<span class='success_msg' style='color:red;'>You are not register customer.</span>"); 
+                                }
+                                else if(response == "not_send_mail"){
+                                    $("div.login_logo h3").after("<span class='success_msg' style='color:red;'>Email has been not sent.</span>"); 
+                                }
+                                else if(response == "success_msg"){
+                                    $("div.login_logo h3").after("<span class='success_msg' style='color:green;'>Email has been sent successfully.</span>"); 
+                                    window.location.href = rp;
+                                }
+				
+				setTimeout(remove_message,2000);
+				
+			});
+			
+		} else{
+			return false;
+		}
+	});
+        
+        
 	$("#forgot_password").on("click",function(){
 	
 		$("div#loginform").css("display","none");
@@ -317,6 +427,11 @@ function after_submit_signupform(){
 	$("a#submitdata").trigger("click");
 	
 }
+
+function remove_message(){
+    $("span.success_msg").remove();
+}
+
 
 function locationList() {
     var id = $('#city').val();

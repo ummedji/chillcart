@@ -186,7 +186,10 @@ class UsersController extends AppController
         $this->Session->setFlash('<p>' . __('Logout successfully', true) . '</p>', 'default',
             array('class' => 'alert alert-success'));
         $this->Auth->logout();
-        $this->redirect(array('controller' => 'Users', 'action' => 'customerlogin', 'customer' => true));
+        
+        $this->redirect('/');
+        
+        //$this->redirect(array('controller' => 'Users', 'action' => 'customerlogin', 'customer' => true));
 
     }
 
@@ -339,7 +342,7 @@ class UsersController extends AppController
                 $email->emailFormat('html');
                 $email->viewVars(array('mailContent' => $mailContent, 'source' => $source));
                 
-               // $email->send();
+                $email->send();
                // 
                // if ($email->send()) {
               //     echo 1;
@@ -367,7 +370,12 @@ class UsersController extends AppController
     public function customer_customerlogin()
     {
         $this->layout = 'frontend';
-        if ($this->request->data['Users']['email'] != '') {
+       // if ($this->request->data['Users']['email'] != '') {
+            
+        if ($_POST["data"][1]["name"] == "data[Users][email]" && $_POST["data"][1]["value"] != '') {
+            
+            $this->request->data['Users']['email'] = $_POST["data"][1]["value"];
+            
             $userData = $this->User->find('first', array(
                 'conditions' => array(
                     'User.username' => $this->request->data['Users']['email'],
@@ -401,7 +409,8 @@ class UsersController extends AppController
 
                     $mailContent = $forgetpasswordContent;
                     $userID = $userData['User']['id'];
-                    $siteUrl = $this->siteUrl . '/customer/users/customerlogin/';
+                   // $siteUrl = $this->siteUrl . '/customer/users/customerlogin/';
+                    $siteUrl = $this->siteUrl;
                     $mailContent = str_replace("{Customer name}", $customerName, $mailContent);
                     $mailContent = str_replace("{source}", $source, $mailContent);
                     $mailContent = str_replace("{title}", $title, $mailContent);
@@ -418,15 +427,26 @@ class UsersController extends AppController
                     $email->viewVars(array('mailContent' => $mailContent, 'source' => $source, 'storename' => $storename));
 
                     if ($email->send()) {
-                        $this->Session->setFlash('<p>' . __('Email has been sent successfully', true) . '</p>', 'default',
-                            array('class' => 'alert alert-success'));
-                        $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                        
+                        echo "success_msg";
+                        die;
+                        
+                      //  $this->Session->setFlash('<p>' . __('Email has been sent successfully', true) . '</p>', 'default',
+                      //      array('class' => 'alert alert-success'));
+                     //   $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                    }
+                    else{
+                        echo "not_send_mail";
+                        die;
                     }
                 }
             } else {
-                $this->Session->setFlash('<p>' . __('You are not register customer', true) . '</p>', 'default',
-                    array('class' => 'alert alert-danger'));
-                $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                
+                echo "not_registered_error";
+                die;
+              //  $this->Session->setFlash('<p>' . __('You are not register customer', true) . '</p>', 'default',
+              //      array('class' => 'alert alert-danger'));
+              //  $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
             }
         }
         if (isset($this->request->query['page']) && $this->request->query['page'] == 'checkout') {
@@ -439,8 +459,21 @@ class UsersController extends AppController
     			<a href="' . $this->siteUrl . '/users/logout/customer"> Click here to Logout  </a>';
             exit();
         }
-        if ($this->request->data['User']['username'] != '' && $this->request->data['User']['password'] != '') {
+        
+       // if ($this->request->data['User']['username'] != '' && $this->request->data['User']['password'] != '') {
+        if (($_POST["data"][1]["name"] == "data[User][username]" && $_POST["data"][1]["value"] != '') && ($_POST["data"][1]["name"] == "data[User][password]" && $_POST["data"][2]["value"] != '')) {
             $role = array(4);
+            
+            $this->request->data['User']['username'] = $_POST["data"][1]["value"];
+            $this->request->data['User']['password'] = $_POST["data"][2]["value"];
+            
+            if(isset($_POST["data"][3]["value"])){
+                $this->request->data['User']['rememberMe'] = $_POST["data"][3]["value"];
+            }
+            else
+            {
+                 $this->request->data['User']['rememberMe'] = 0;
+            }
 
             $userData = $this->User->find('first', array(
                 'conditions' => array(
@@ -452,12 +485,14 @@ class UsersController extends AppController
 
                 $this->Session->write("preSessionid", $this->Session->id());
                 if ($this->Auth->login()) {
+                    
                     #REmember me
                     if ($this->request->data['User']['rememberMe'] == 1) {
                         $this->Cookie->write('rememberMe', $this->request->data['User'], true, "12 months");
                     } else {
                         $this->Cookie->delete('rememberMe');
                     }
+                    
                     if ($this->Session->read("redirectpage") == 'checkout') {
                         $this->Session->delete("redirectpage");
                         $this->redirect(array('controller' => 'checkouts', 'action' => 'index', 'customer' => false));
@@ -466,15 +501,19 @@ class UsersController extends AppController
 
                 } else {
 
-                    $this->Session->setFlash('<p>' . __('Login failed your Username or Password Incorrect', true) . '</p>', 'default',
-                        array('class' => 'alert alert-danger'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                    echo "data_incorrect_error";
+                    die;
+                   // $this->Session->setFlash('<p>' . __('Login failed your Username or Password Incorrect', true) . '</p>', 'default',
+                      //  array('class' => 'alert alert-danger'));
+                  //  $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
                 }
             } else {
 
-                $this->Session->setFlash('<p>' . __('Login failed, unauthorized', true) . '</p>', 'default',
-                    array('class' => 'alert alert-danger'));
-                $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                 echo "unathorized_error";
+                 die;
+              //  $this->Session->setFlash('<p>' . __('Login failed, unauthorized', true) . '</p>', 'default',
+               //     array('class' => 'alert alert-danger'));
+               // $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
             }
         }
 
