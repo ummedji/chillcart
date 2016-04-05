@@ -214,7 +214,7 @@ if ($value['SubCategory']['id'] != $subCat) {
 
            			</span>
                     <div class="product__detail-action new_add_to_cart">
-                        <!--a href="javascript:void(0);" rel="nofollow" class="button add_to_cart_button " -->
+                        <a href="javascript:void(0);" rel="nofollow" class="button add_to_cart_button ">
                             <?php if ($value['Product']['price_option'] == 'single') { //echo "<pre>";print_r($value);die();
                                 if($value['ProductDetail'][0]['quantity'] != 0){?>
                                     <!--  <span class="prodAddprice" onclick="addToCart(<?php //echo $value['ProductDetail'][0]['id']; ?>);" >
@@ -320,7 +320,7 @@ if ($value['SubCategory']['id'] != $subCat) {
                             } ?>
 
                             <!--<i class="fa fa-plus plushide"></i>-->
-                        <!--/a-->
+                        </a>
 
                     </div>
                 </div>
