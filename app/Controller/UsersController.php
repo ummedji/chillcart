@@ -461,7 +461,7 @@ class UsersController extends AppController
         }
         
        // if ($this->request->data['User']['username'] != '' && $this->request->data['User']['password'] != '') {
-        if (($_POST["data"][1]["name"] == "data[User][username]" && $_POST["data"][1]["value"] != '') && ($_POST["data"][1]["name"] == "data[User][password]" && $_POST["data"][2]["value"] != '')) {
+        if (($_POST["data"][1]["name"] == "data[User][username]" && $_POST["data"][1]["value"] != '') && ($_POST["data"][2]["name"] == "data[User][password]" && $_POST["data"][2]["value"] != '')) {
             $role = array(4);
             
             $this->request->data['User']['username'] = $_POST["data"][1]["value"];
