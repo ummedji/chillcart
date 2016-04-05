@@ -579,7 +579,8 @@ class UsersController extends AppController
                 if ($this->Customer->updateAll(array('Customer.status' => 1), array('Customer.id' => $id))) {
                     $this->Session->setFlash('<p>' . __('Your account is activated', true) . '</p>', 'default',
                         array('class' => 'alert alert-success'));
-                    $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
+                    $this->redirect('/');
+                  //  $this->redirect(array('controller' => 'users', 'action' => 'customerlogin', 'customer' => true));
                 }
                 /*} else {
                     $this->Session->setFlash('<p>'.__('Your account is restricted please contact admin .', true).'</p>', 'default',
@@ -589,7 +590,10 @@ class UsersController extends AppController
             } else {
                 $this->Session->setFlash('<p>' . __('You are not registered customer.', true) . '</p>', 'default',
                     array('class' => 'alert alert-danger'));
-                $this->redirect(array('controller' => 'users', 'action' => 'signup'));
+                
+                $this->redirect('/');
+                
+             //   $this->redirect(array('controller' => 'users', 'action' => 'signup'));
             }
         }
     }
